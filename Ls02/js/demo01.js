@@ -1,6 +1,11 @@
 /*
 	Created by JiXinchan 2018/3/8
 */
+/*数据类型
+  基本类型(Number、String、Boolean、Null、 Undefined)
+  引用类型(object(Array FUnction Date Error)) 
+*/
+
 //类型检测之 typeof
 console.log(typeof 123);
 console.log(typeof true);
