@@ -24,7 +24,7 @@ console.log(a3===b3);//false 此时b3再一次重新开辟了内存
 
 var a4=5;
 var b4=new Number(5);
-console.log(a4==b4);//true 隐式类型转换，b4转换为a4？
+console.log(a4==b4);//true 隐式类型转换，b4转换为a4
 console.log(a4===b4);//false
 
 var a5={x:1};
