@@ -63,7 +63,7 @@ var fun1 = function () {
     }
 };
 obj.fun3 = fun1;
-obj.fun4 = fun1();
+obj.fun4 = fun1();//也会调用一次
 console.log("输出：",obj.fun3());
 console.log("输出：",obj.fun3()());
 console.log("输出：",obj.fun4());
