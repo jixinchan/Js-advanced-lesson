@@ -24,7 +24,7 @@ var execExp = /\d{1,2}(\d)(\d)/;
 var retExp = execExp.exec("12s342dsfsf233s");
 console.log(retExp instanceof Array,retExp,execExp.lastIndex);
 console.log(retExp instanceof Array,retExp,execExp.lastIndex);
-//342 4 2     3
+//342 4 2     3 匹配到的342中的4,2是属于两个(\d)分组的
 //342 4 2     3
 
 //对于全局模式下 每检测一次lastIndex增加一次
