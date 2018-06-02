@@ -1,14 +1,13 @@
+function div2click(){
+	alert("div2click");
+}
 window.onload = function(){
 	var div3 = document.getElementById("div3");
-	function div3click(){
-		alert("div3click");
-	}
-	function div2click(){
-		alert("div2click");
-	}
-
-	div3.onclick = div3click;
-	div3.onclick = null;
+	function showType(e){
+		console.log(e.type);
+	}//事件对象函数
+	div3.onclick = showType;
+	//div3.onclick = null;
 }
 
 
@@ -30,7 +29,7 @@ window.onload = function(){
 // 3.HTML事件处理程序：在HTML中在标签中直接添加事件。
 // 	缺点：HTML和JS紧密的耦合性
 // 4.DOM0级事件处理程序：在JS中通过id获取元素，再用匿名函数添加事件
-// 	优点：可以给一个元素添加多个事件，多个事件处理程序，按顺序执行
+// 	优点：可以给一个元素添加多个事件，多个事件处理程序，最后一个覆盖前面的
 // 5.DOM2级事件处理程序：
 // 	两个方法：
 // 	用于处理指定和删除事件处理程序的操作
@@ -74,5 +73,7 @@ window.onload = function(){
 // 	target
 // 	stopPropagation（）用于阻止事件冒泡
 // 	preventDefault（）阻止事件的默认行为
+
+
 	
 // 9.IE中的事件对象
