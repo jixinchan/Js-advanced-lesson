@@ -12,6 +12,6 @@ http.createServer(function(req,res){
      });
      setTimeout(function(){
          res.end("你好，我已收到信息："+getDatestr);
-     },200*Math.random());
+     },20000*Math.random());
 }).listen(8080,"127.0.0.1");
 console.log("start server!");
