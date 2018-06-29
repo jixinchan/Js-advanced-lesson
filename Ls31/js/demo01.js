@@ -96,7 +96,7 @@ obj['a']='!';
 obj.b='!!'
 for (var k in obj){
     console.log(k);
-}//a,b
+}//a,b 只输出不是Symbol的
 Object.getOwnPropertySymbols(obj);
 //[Symbol(a), Symbol(b)]
 Object.getOwnPropertySymbols(obj).forEach((v)=>{console.log(obj[v])});
@@ -105,9 +105,16 @@ Object.getOwnPropertySymbols(obj).forEach((v)=>{console.log(obj[v])});
 
 //Symbol.for(str)
 //去搜索有没有以str为名称的Symbol，有就返回，没有就创建
+//会登记在全局环境中供搜索，Symbol()不会创建
 var s1 = Symbol.for('foo');
 var s2 = Symbol.for('foo');
 console.log(s1 === s2); // true
+
+//Symbol.keyfor()方法返回一个已登记的Symbol类型值的key
+var s1 = Symbol.for("foo");
+console.log(Symbol.keyFor(s1)); // "foo"
+var s2 = Symbol("foo");
+console.log(Symbol.keyFor(s2)); // undefined
 
 //新增数据结构set
 //- 它类似于数组，但是成员的值都是唯一的，没有重复的值
@@ -115,6 +122,12 @@ console.log(s1 === s2); // true
 //- 通过add方法向Set结构加入成员，Set结构不会添加重复的值
 let s1 = new Set([1,2,3,1,2,3]);
 console.log(s1);
+var s2 = new Set();
+[2,3,4,2,3,5].map(x=>s2.add(x));
+for (var i of s2) {
+    console.log(i);
+}//2 3 4 5
+
 //数组去重
 [...new Set([1,2,3,3])];
 let set = new Set([2,3,4,5,6,2,3,4]);
@@ -126,5 +139,125 @@ set.add({});
 console.log(set.size);//1
 set.add({});
 console.log(set.size);//2
+//{}引用数据类型 内存空间不同
 
-//has delete 
+//has delete clear keys values entries
+var s = new Set();
+s.add(2).add(1).add(2);
+for (var i of s) {
+    console.log(i);
+}//1  2
+s.size // 2
+s.has(1); // true
+s.has(2); // true
+s.has(3); // false
+s.delete(2);
+s.has(2); // false
+
+var items = new Set([1, 2, 3, 4, 5]);
+var array = Array.from(items);
+
+var set = new Set(['red', 'green', 'blue']);
+console.log(typeof set.keys());//object
+console.log(typeof set.values());
+console.log(typeof set.entries());
+for (var item of set.keys()) {
+    console.log(item);
+}
+// red
+// green
+// blue
+for (var item of set.values()) {
+    console.log(item);
+}
+// red
+// green
+// blue
+
+for (var [key,value] of set.entries()) {
+    console.log(key,value);
+}
+//Set结构的实例的forEach方法，用于对每个成员执行某种操作，没有返回值。
+var set = new Set([1, 2,]);
+set.forEach((value, key) => console.log(value * 2) );
+set = new Set([...set].map(x => x * 2));
+// 返回Set{2, 4}
+var set = new Set([2, 3, 4, 5]);
+set = new Set([...set].filter(x => (x % 2) == 0));
+// 返回Set{2, 4}
+
+// set应用案例 并集、交集
+let a = new Set([1, 2, 3]);
+let b = new Set([4, 3, 2]);
+// 并集
+let union = new Set([...a, ...b]);
+// Set {1, 2, 3, 4}
+// 交集
+let intersect = new Set([...a].filter(x => b.has(x)));
+// set {2, 3}
+
+//新增数据结构Map，类似于对象
+//key 可以是任意数据类型
+var o = {};
+var m =new Map();
+m.set(1,'number');
+m.set(o,'string');
+m.get(1);
+m.has(o);
+m.delete(1);
+m.has(1);
+
+var m1 = new Map([
+    [1,'number'],
+    ['o','string']
+]);
+//等价于
+var arr = [
+    [1,'number'],
+    ['o','string']
+];
+arr.forEach(([key,value])=>map.set(key,value));
+
+// 如果对同一个键多次赋值，后面的值将覆盖前面的值。
+let map = new Map();
+map.set(1, 'aaa').set(1, 'bbb');
+map.get(1); 
+
+//因为数组是引用数据类型，两个地方的['a']严格不等
+var map = new Map();
+map.set(['a'],234);
+map.get(['a']);//undefined
+//基本数据类型
+var map = new Map();
+map.set('a', 555);
+map.get('a');//555
+
+//
+var map = new Map();
+var o={};
+map.set({},3);
+map.set(o,4);
+map.get(o);//4
+map.get({});//undefined
+
+let map = new Map([
+    [1,'number'],
+    [2,'number2'],
+    [3,'number3']
+]);
+console.log([...map.keys()]);
+console.log([...map.values()]);
+console.log([...map.entries()]);
+
+
+let map0 = new Map()
+    .set(1, 'a')
+    .set(2, 'b')
+    .set(3, 'c');
+let map1 = new Map(
+    [...map0].filter(([k, v]) => k < 3)
+);
+// 产生Map结构 {1 => 'a', 2 => 'b'}
+let map2 = new Map(
+    [...map0].map(([k, v]) => [k * 2, '_' + v])
+);
