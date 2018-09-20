@@ -13,7 +13,7 @@ var regExp=/ab/;
 var matchResult="xxAbcaabbbxyz".match(regExp);
 console.log(matchResult);
 
-var regExp=/a*b/gi;//0或多个a+b
+var regExp=/a*b/gi;//0或多个a +b
 var matchResult="xxAbcaabbbxyz".match(regExp);
 console.log(matchResult);
 

@@ -16,7 +16,7 @@ console.log("moon".search(/\boo\b/));//-1
 
 console.log(/oo\B/.test("moon"));//true
 console.log(/oon\B/.test("moon"));//false
-console.log(/oo\B/.test("moon"));//true
+console.log(/\Boo/.test("moon"));//true
 console.log(/\Boo\B/.test("moon"));//true
 
 " a2r4 ".replace(/\B/gi,"X");
